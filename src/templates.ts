@@ -21,5 +21,9 @@ export function template(kind: DocKind, name: string): Content {
         // JSX attribute strings have no escapes, so swap double quotes rather than escaping them.
         text: `import { Deck, Slide, Title, Subtitle } from "ppt2"\n\nexport default (\n  <Deck title="${name.replace(/"/g, "'")}" theme="midnight">\n    <Slide layout="title">\n      <Title>${jsx(name)}</Title>\n      <Subtitle>Add a subtitle</Subtitle>\n    </Slide>\n  </Deck>\n)\n`,
       }
+    case "diagram":
+      return {
+        text: `import { flow } from "arrowsmith"\n\nexport default flow({\n  title: ${quote(name)},\n  nodes: {\n    start: "Start",\n    done: "Done",\n  },\n  edges: [["start", "done"]],\n})\n`,
+      }
   }
 }

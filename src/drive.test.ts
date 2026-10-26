@@ -8,6 +8,10 @@ describe("templates", () => {
     expect(template("deck", "Kickoff").text).toContain('<Deck title="Kickoff"')
   })
 
+  it("writes a diagram that names itself", () => {
+    expect(template("diagram", "Signup").text).toContain('title: "Signup"')
+  })
+
   it("keeps deck JSX valid when the name has quotes and braces", () => {
     const text = template("deck", 'The "big" {plan}').text!
     expect(text).toContain(`<Deck title="The 'big' {plan}"`)
