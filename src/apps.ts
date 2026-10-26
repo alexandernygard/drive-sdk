@@ -3,7 +3,7 @@ import type { DocKind, Kind } from "./types.js"
 export interface AppInfo {
   kind: DocKind
   /** App id at auth.nyggis.com, and its name. */
-  app: "word2" | "xl2" | "ppt2" | "arrowsmith"
+  app: "word2" | "xl2" | "ppt2" | "arrowsmith" | "boards"
   label: string
   /** "New …" menu entries and empty states. */
   noun: string
@@ -56,9 +56,19 @@ export const APPS: Record<DocKind, AppInfo> = {
     color: "#7c5cd6",
     layout: "text",
   },
+  board: {
+    kind: "board",
+    app: "boards",
+    label: "Boards",
+    noun: "Board",
+    origin: "https://boards.nyggis.com",
+    devOrigin: "http://localhost:5320",
+    color: "#0f8b8d",
+    layout: "text",
+  },
 }
 
-export const DOC_KINDS: DocKind[] = ["doc", "sheet", "deck", "diagram"]
+export const DOC_KINDS: DocKind[] = ["doc", "sheet", "deck", "diagram", "board"]
 
 export const KIND_COLORS: Record<Kind, string> = {
   folder: "#f2a922",
@@ -66,6 +76,7 @@ export const KIND_COLORS: Record<Kind, string> = {
   sheet: APPS.sheet.color,
   deck: APPS.deck.color,
   diagram: APPS.diagram.color,
+  board: APPS.board.color,
   file: "#7a8794",
 }
 
@@ -75,10 +86,11 @@ export const KIND_LABELS: Record<Kind, string> = {
   sheet: "Spreadsheet",
   deck: "Presentation",
   diagram: "Diagram",
+  board: "Board",
   file: "File",
 }
 
-export const isDocKind = (kind: string): kind is DocKind => kind === "doc" || kind === "sheet" || kind === "deck" || kind === "diagram"
+export const isDocKind = (kind: string): kind is DocKind => kind === "doc" || kind === "sheet" || kind === "deck" || kind === "diagram" || kind === "board"
 
 export interface Origins {
   /** The drive's API and rooms. */
@@ -99,12 +111,12 @@ export function defaultOrigins(hostname = (globalThis as { location?: { hostname
         api: "http://localhost:8790",
         web: "http://localhost:5310",
         auth: "http://localhost:8787",
-        apps: { doc: APPS.doc.devOrigin, sheet: APPS.sheet.devOrigin, deck: APPS.deck.devOrigin, diagram: APPS.diagram.devOrigin },
+        apps: { doc: APPS.doc.devOrigin, sheet: APPS.sheet.devOrigin, deck: APPS.deck.devOrigin, diagram: APPS.diagram.devOrigin, board: APPS.board.devOrigin },
       }
     : {
         api: "https://drive.nyggis.com",
         web: "https://drive.nyggis.com",
         auth: "https://auth.nyggis.com",
-        apps: { doc: APPS.doc.origin, sheet: APPS.sheet.origin, deck: APPS.deck.origin, diagram: APPS.diagram.origin },
+        apps: { doc: APPS.doc.origin, sheet: APPS.sheet.origin, deck: APPS.deck.origin, diagram: APPS.diagram.origin, board: APPS.board.origin },
       }
 }

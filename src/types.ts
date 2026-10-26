@@ -1,5 +1,5 @@
 /** Documents that open in one of the office apps. */
-export type DocKind = "doc" | "sheet" | "deck" | "diagram"
+export type DocKind = "doc" | "sheet" | "deck" | "diagram" | "board"
 /** Everything the drive holds: folders, app documents and uploaded files. */
 export type Kind = "folder" | DocKind | "file"
 

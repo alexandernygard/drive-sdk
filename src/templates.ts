@@ -4,6 +4,7 @@ import type { Content, DocKind } from "./types.js"
 // first person to open it sees the same thing as everyone after them. Keep these valid for each app.
 
 const quote = (s: string) => JSON.stringify(s)
+const html = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!)
 const jsx = (s: string) => s.replace(/[{}<>]/g, "")
 
 export function template(kind: DocKind, name: string): Content {
@@ -24,6 +25,11 @@ export function template(kind: DocKind, name: string): Content {
     case "diagram":
       return {
         text: `import { flow } from "arrowsmith"\n\nexport default flow({\n  title: ${quote(name)},\n  nodes: {\n    start: "Start",\n    done: "Done",\n  },\n  edges: [["start", "done"]],\n})\n`,
+      }
+    case "board":
+      // One HTML file. Boards serves it sandboxed, with `boards.query()` for live data (see the boards repo).
+      return {
+        text: `<!doctype html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>${html(name)}</title>\n  <style>\n    body { font: 15px/1.5 system-ui, sans-serif; margin: 0; padding: 32px; background: Canvas; color: CanvasText; }\n    h1 { font-size: 24px; margin: 0 0 8px; }\n    p { opacity: 0.7; }\n  </style>\n</head>\n<body>\n  <h1>${html(name)}</h1>\n  <p>Ask the assistant what this board should show.</p>\n</body>\n</html>\n`,
       }
   }
 }

@@ -12,6 +12,12 @@ describe("templates", () => {
     expect(template("diagram", "Signup").text).toContain('title: "Signup"')
   })
 
+  it("writes a board whose title is escaped HTML", () => {
+    const text = template("board", "Q4 <PRs> & \"bugs\"").text!
+    expect(text).toContain("<title>Q4 &lt;PRs&gt; &amp; &quot;bugs&quot;</title>")
+    expect(text.startsWith("<!doctype html>")).toBe(true)
+  })
+
   it("keeps deck JSX valid when the name has quotes and braces", () => {
     const text = template("deck", 'The "big" {plan}').text!
     expect(text).toContain(`<Deck title="The 'big' {plan}"`)
