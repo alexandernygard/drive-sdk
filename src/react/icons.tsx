@@ -6,6 +6,7 @@ import {
   FileTextIcon,
   FileVideoIcon,
   FolderIcon,
+  WorkflowIcon,
   PresentationIcon,
   FileSpreadsheetIcon,
   type LucideIcon,
@@ -24,6 +25,8 @@ export function iconFor(kind: Kind, mime?: string | null): LucideIcon {
       return FileSpreadsheetIcon
     case "deck":
       return PresentationIcon
+    case "diagram":
+      return WorkflowIcon
     case "file":
       if (mime?.startsWith("image/")) return FileImageIcon
       if (mime?.startsWith("video/")) return FileVideoIcon
