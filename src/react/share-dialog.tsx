@@ -126,7 +126,7 @@ export function ShareDialog({ itemId, open, onOpenChange, onChange, drive = getD
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="gap-0 p-0 sm:max-w-lg">
-        <DialogHeader className="flex-row items-center gap-3 border-b px-5 py-4 text-left">
+        <DialogHeader className="min-w-0 flex-row items-center gap-3 border-b px-5 py-4 pr-12 text-left">
           {item ? <KindIcon kind={item.kind} mime={item.mime} size={36} /> : <Skeleton className="size-9 rounded-xl" />}
           <div className="min-w-0">
             <DialogTitle className="truncate">Share {item ? `“${item.name}”` : ""}</DialogTitle>
