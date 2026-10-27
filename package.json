@@ -1,6 +1,6 @@
 {
   "name": "@alexandernygard/drive",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Client for Nyggis Drive: open, create and share documents from word2, xl2 and ppt2, plus the shared React pieces (share dialog, avatars, file icons).",
   "type": "module",
   "license": "MIT",
